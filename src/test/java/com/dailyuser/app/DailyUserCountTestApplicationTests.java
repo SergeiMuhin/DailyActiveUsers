@@ -30,7 +30,7 @@ class DailyUserCountTestApplicationTests {
 	{  
 		DailyBoundaryRequest dailyRequest = new DailyBoundaryRequest();
 		dailyRequest.setDate("01/01/2020");
-		dailyRequest.setFileLocation("C:\\Users\\Sergei\\Desktop\\input.txt");
+		dailyRequest.setFileLocation(System.getProperty("user.dir") + "/src/test/java/TestInput/TestInput");
 		DailyBoundaryResponse reponse = controllerAPI.countinfo(dailyRequest);
 	    assertEquals(3, reponse.getCount());
 	    assertEquals("01/01/2020", reponse.getDate());
@@ -41,7 +41,7 @@ class DailyUserCountTestApplicationTests {
 	{  
 		Assertions.assertThrows(NullPointerException.class, ()->{		DailyBoundaryRequest dailyRequest = new DailyBoundaryRequest();
 		dailyRequest.setDate("0101/2022"); // no such date // bad date
-		dailyRequest.setFileLocation("C:\\Users\\Sergei\\Desktop\\input.txt");
+		dailyRequest.setFileLocation(System.getProperty("user.dir") + "/src/test/java/TestInput/TestInput");
 		DailyBoundaryResponse reponse = controllerAPI.countinfo(dailyRequest);
 	  });
 	}
@@ -50,8 +50,8 @@ class DailyUserCountTestApplicationTests {
 	public void countBadFilelocationDataTest() 
 	{  
 		Assertions.assertThrows(NullPointerException.class, ()->{		DailyBoundaryRequest dailyRequest = new DailyBoundaryRequest();
-		dailyRequest.setDate("01/01/2022"); // no such date // bad date
-		dailyRequest.setFileLocation("C:\\Users\\Sergei\\Des\\input.txt");
+		dailyRequest.setDate("01/01/2022");
+		dailyRequest.setFileLocation("badInputLocation");
 		DailyBoundaryResponse reponse = controllerAPI.countinfo(dailyRequest);
 	  });
 	}

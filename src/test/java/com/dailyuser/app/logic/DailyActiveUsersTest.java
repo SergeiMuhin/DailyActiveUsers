@@ -11,19 +11,29 @@ public class DailyActiveUsersTest {
 
 	@Test
 	public void testlogic() {
+		System.out.println(System.getProperty("user.dir"));
 		DailyActiveUsers dailyLogicTest = new DailyActiveUsers();
-		DailyBoundaryResponse reponse = dailyLogicTest.dailyActiveUsersCounter("C:\\Users\\Sergei\\Desktop\\input.txt",
+		DailyBoundaryResponse reponse = dailyLogicTest.dailyActiveUsersCounter(System.getProperty("user.dir") + "/src/test/java/TestInput/TestInput",
 				"01/01/2020");
 		assertEquals(3, reponse.getCount());
 		assertEquals("01/01/2020", reponse.getDate());
 	}
-	
-    @Test
+
+	@Test
 	public void testBadData() {
 		Assertions.assertThrows(NullPointerException.class, () -> {
 			DailyActiveUsers dailyLogicTest = new DailyActiveUsers();
 			DailyBoundaryResponse reponse = dailyLogicTest
-					.dailyActiveUsersCounter("C:\\Users\\Sergei\\Desktop\\input.txt", "0101/2020");
+					.dailyActiveUsersCounter(System.getProperty("user.dir") + "/src/test/java/TestInput/TestInput", "0101/2020");
+		});
+	}
+
+	@Test
+	public void testBadFileLocation() {
+		Assertions.assertThrows(NullPointerException.class, () -> {
+			DailyActiveUsers dailyLogicTest = new DailyActiveUsers();
+			DailyBoundaryResponse reponse = dailyLogicTest.dailyActiveUsersCounter("badInputLocation",
+					"01/01/2020");
 		});
 	}
 }
